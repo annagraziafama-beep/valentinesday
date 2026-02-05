@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #fff2b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Comic Neue", "Comic Sans MS", cursive;
+    overflow: hidden;
+  }
+
+  /* DECORATIVE CATS */
+  .decor-cat {
+    position: fixed;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .decor-1 {
+    top: 6%;
+    left: 5%;
+    width: 180px;
+  }
+
+  .decor-2 {
+    bottom: 8%;
+    left: 8%;
+    width: 200px;
+  }
+
+  .decor-3 {
+    top: 10%;
+    right: 6%;
+    width: 180px;
+  }
+
+  /* CLICKABLE CAT (replaces envelope) */
+  #envelope-container {
+    cursor: pointer;
+    text-align: center;
+    z-index: 2;
+  }
+
+  #envelope-container img {
+    width: 260px;
+  }
+
+  /* LETTER */
+  #letter-container {
+    display: none;
+    z-index: 2;
+  }
+
+  .letter-window {
+    background: #fffdf4;
+    border-radius: 22px;
+    padding: 30px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transform: scale(0.85);
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .letter-window.open {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .letter-window.final {
+    background: #fff7cc;
+  }
+
+  #letter-title {
+    font-weight: normal;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  #letter-cat {
+    width: 220px;
+    margin: 20px 0;
+  }
+
+  /* BUTTONS */
+  #letter-buttons {
+    position: relative;
+    height: 60px;
+    margin-top: 10px;
+  }
+
+  button {
+    border: none;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .btn[alt="Yes"] {
+    background: #ff8fa3;
+    color: white;
+    left: 20%;
+  }
+
+  .no-btn {
+    background: #e5e5e5;
+    color: #555;
+    left: 55%;
+  }
+
+  #final-text {
+    display: none;
+    margin-top: 15px;
+    font-size: 1.05rem;
+    color: #444;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- DECORATIVE CATS (formerly background) -->
+<img class="decor-cat decor-1"
+     src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHZka2h3Ym1yd2c0bXJlejlpdmZ2MjQ0Y2VrcTdlMGp2eGU5dGIxdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UA1n322Kgn23yY5PrL/giphy.gif">
+
+<img class="decor-cat decor-2"
+     src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjBoYW93czAzbGdsd3ppNXhqcXEwNmNraTd0MTFicDRmYmR4N2J5ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/54kolBLJKeo0EpjZiq/giphy.gif">
+
+<img class="decor-cat decor-3"
+     src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWdmYXkycDFteDk2Yzl0YWU0azB0NTVwbWozcWZ6MmV0YjU4cWlybCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GZNoZnXF40M1CrxSlv/giphy.gif">
+
+<!-- CLICKABLE CAT -->
+<div id="envelope-container">
+  <img
+    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGxwcG5nZjN0eWFjc2pyaWVwa2NrNjY5Z2NvaWJ6bmhiYmY2bDkyOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qJxUre5p14xgqtefiA/giphy.gif"
+    alt="Clickable cat">
+</div>
+
+<!-- LETTER -->
+<div id="letter-container">
+  <div class="letter-window">
+
+    <h3 id="letter-title">
+      Roni, will you be my Valentine?
+      <br><br>
+      Valentine Date: Meow Restaurant.
+      <br>
+      You just need to be cute, as always!!
+    </h3>
+
+    <img
+      id="letter-cat"
+      src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmQwd20yYjR2dnk3bmJ0eXJnMXQyaWdlYTk1cW5lb291OXAzMG5oayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zGdHl3EOzwUpMqg67p/giphy.gif"
+      alt="Cute cat">
+
+    <div id="letter-buttons">
+      <button class="btn" alt="Yes">Yes</button>
+      <button class="no-btn">No</button>
+    </div>
+
+    <div id="final-text">
+      <p>That makes me really happy 💛</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const envelope = document.getElementById("envelope-container");
+  const letter = document.getElementById("letter-container");
+  const noBtn = document.querySelector(".no-btn");
+  const yesBtn = document.querySelector(".btn[alt='Yes']");
+
+  const title = document.getElementById("letter-title");
+  const catImg = document.getElementById("letter-cat");
+  const buttons = document.getElementById("letter-buttons");
+  const finalText = document.getElementById("final-text");
+
+  envelope.addEventListener("click", () => {
+    envelope.style.display = "none";
+    letter.style.display = "flex";
+
+    setTimeout(() => {
+      document.querySelector(".letter-window").classList.add("open");
+    }, 50);
+  });
+
+  noBtn.addEventListener("mouseover", () => {
+    const distance = 200;
+    const angle = Math.random() * Math.PI * 2;
+
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+
+  yesBtn.addEventListener("click", () => {
+    title.textContent = "Yay 💛 I’m really looking forward to it.";
+
+    catImg.src =
+      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTc4eTY0NDc5cjdhMGdnbDI0cmNzOHo0Zm1zcGF2Zmx5OWpja2U1byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VCPFtFuWvaDa1RdhKZ/giphy.gif";
+
+    document.querySelector(".letter-window").classList.add("final");
+    buttons.style.display = "none";
+    finalText.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
